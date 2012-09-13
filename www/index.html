@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image IQ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+    <meta charset="utf-8" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/css/master.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/quiz.css" type="text/css" />
+    <link rel="stylesheet" href="static/css/homepage.css" type="text/css" />
+    
+    <!-- MIXPANEL -->
+    <script type="text/javascript">(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.1.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
+    g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.identify people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
+    mixpanel.init("5ec0f11403a122775475e15ae1f86ee8");</script>
+</head>
+<body onload="onBodyLoad()">	
+    <!-- PRELOADING THE FONT -->
+    <div id="preload-font">Preloading @font-face...</div>
+    
+    <!-- CORNER MASK -->
+    <img src="static/images/corner_mask.png" width="320" height="10" id="corner-mask" />
+    
+    <!-- SCREEN OVERLAY -->
+    <div id="success-message">
+	    <img src="static/images/star.png" id="success-star" width="93" height="98" />
+	    <img src="static/images/sunburst.png" id="sunburst" width="319" height="319" />
+	    <h1>Correct!</h1>
+    </div>
+    
+    <!-- SOUND EFFECTS -->
+    <audio id="audio-success" src="static/sounds/success.mp3" type="audio/mpeg" preload="auto"></audio>
+    <audio id="audio-fail" src="static/sounds/fail.mp3" type="audio/mpeg" preload="auto"></audio>
+    
+    <!-- HOMEPAGE -->
+    <div id="page-home" class="page">
+        <!-- PHOTO PACKS -->
+        <div id="cards"></div>
+        
+        <img src="static/images/background_question.png" width="320" height="480" class="wallpaper" />
+        
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+        	<img src="static/images/swipe_left_alt.png" class="slider-control left" width="32" height="33" />
+        	
+        	<div style="padding: 0 0 22px 0;">
+		        <a id="button-take-quiz" class="button red">Play Now!</a>
+        	</div>
+        	
+        	<img src="static/images/swipe_right_alt.png" class="slider-control right" width="32" height="33" />
+        </div>
+    </div>
+    
+    <!-- QUIZ PAGES AND ALL THAT JAZZ -->
+    <div id="page-extra" class="page fade-out" style="display: none;">
+	    <!-- QUESTION -->
+		<div id="question-template" class="question" style="display: none;">
+		    <img src="static/images/push_pin.png" width="29" height="34" class="push-pin" />
+		    
+		    <div class="polaroid-wrapper">
+		        <!-- PHOTO -->
+		        <div class="polaroid"></div>
+		    </div>
+		    
+		    <div class="container">
+		        <!-- QUESTION -->
+		        <h1></h1>
+		        
+		        <!-- CHOICES -->
+		        <div id="quiz-buttons"></div>
+		    </div>
+		</div>
+		
+		<!-- QUESTIONS -->
+		<div id="question-container">
+			<div id="quiz-questions">
+			    <!-- QUESTIONS POPULATED VIA JS -->
+			</div>
+		    
+		    <!-- SUMMARY SCREEN -->
+		    <div id="summary" class="question" style="display: none;">
+		        <!-- MEDAL -->
+		        <div id="medal">
+		            <img src="static/images/medal_shine.png" class="medal-shine" width="51" height="65" />
+		            <img src="static/images/medal_shine.png" class="medal-shine" width="51" height="65" />
+		            <img src="static/images/medal_shine.png" class="medal-shine" width="51" height="65" />
+		            <img src="" id="quiz-medal" width="214" height="244" />
+		        </div>
+		        
+		        <!-- PERCENTAGE -->
+		        <h1 id="quiz-percentage">
+		            <!-- POPULATED VIA JS -->
+		        </h1>
+		        
+		        <!-- SUMMARY -->
+		        <h2 id="quiz-summary">Try challenging your friends!</h2>
+		        
+		        <div class="container">
+		            <button id="button-challenge" class="button red bolt">Challenge Friends!</button>
+		            <button id="button-home" class="button secondary">Choose another quiz</button>
+		        </div>
+		    </div>
+		</div>
+		
+		<!-- TOOLBAR -->
+		<div class="toolbar">
+		    <div class="toolbar-wrapper">
+		        <!-- BACK BUTTON -->
+		        <img src="static/images/home.png" id="back-arrow" class="left" width="26" height="29" />
+		        
+		        <!-- QUESTION COUNTER -->
+		        <h2 id="question-count" class="right" style="margin-bottom: 1px;">
+		            <span id="current-question"></span>/<span id="total-questions"></span>
+		        </h2>
+		    </div>
+		</div>
+    </div>
+    
+    <!-- JAVASCRIPT -->
+    <script src="static/js/cordova-1.8.1.min.js"></script>
+    <script src="static/js/SMSComposer.min.js"></script>
+    <script src="static/js/swipeview.min.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.tappable.min.js"></script>
+    <script>
+        /* Prevent default dragging behavior
+        ------------------------------------------------------------ */
+        
+    	function preventBehavior(e) {
+        	e.preventDefault(); 
+    	};
+    	
+    	document.addEventListener('touchmove', preventBehavior, false);
+    	
+    	/* Image preloader
+        ------------------------------------------------------------ */
+    	
+    	function preload(arrayOfImages) {
+            $(arrayOfImages).each(function() {
+	            $('<img/>')[0].src = this;
+            });
+        }
+
+    	/* Array in-place shuffler
+        ------------------------------------------------------------ */        
+        
+        function fisherYatesShuffle(myArray) {
+            var i = myArray.length;
+            if (i == 0) return false;
+            while (--i) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tempi = myArray[i];
+                var tempj = myArray[j];
+                myArray[i] = tempj;
+                myArray[j] = tempi;
+            }
+        }
+        
+        /* Globals
+        ------------------------------------------------------------ */
+        
+        // Regex
+        var imgSrcReplace = new RegExp('(src=)(".*?"|\'.*?\'|[^"\'][^\s]*)');
+        var imgStyleReplace = new RegExp('(style=)(".*?"|\'.*?\'|[^"\'][^\s]*)');
+        
+        // Quiz card carousel
+        var	carousel, el, i, page, slides = [];
+        
+        // File System
+        var scoreFile;
+	    var scoreWriter;
+	    var latestScores = {};
+        
+        // Quizzes
+        var currentQuizQuestions;
+        var currentQuizName;
+        var currentQuizShortName;
+        
+        var currentQuestion = 0;
+		
+		var answersRight = 0;
+		var answersWrong = 0;
+		
+		var questionNumber = 0;
+		var quizPercentage = 0;
+		
+		var askedToRateApp = false;
+		
+		// DOM Elements
+		var $audioSuccess = document.getElementById('audio-success');
+		var $audioFail = document.getElementById('audio-fail');
+		
+		var $successMessage = $('#success-message');
+		var $successStar = $('#success-star');
+		var $successSunburst = $('#sunburst');
+		
+		var $pageHome = $('#page-home');
+        var $pageExtra = $('#page-extra');
+		var $currentQuestion = $('#current-question');
+		var $totalQuestions = $('#total-questions');
+		
+		var $takeQuizButton = $('#button-take-quiz');
+		
+		var $summary = $('#summary');
+		var $quizSummary = $('#quiz-summary');
+	    var $quizMedal = $('#quiz-medal');
+	    var $quizQuestions = $('#quiz-questions');
+	    
+	    /* Sound effects
+        ------------------------------------------------------------ */
+    	
+        function sound_success() {
+	        $audioSuccess.play();
+        }
+        
+        function sound_fail() {
+	        $audioFail.play();
+        }
+        
+        /* Save the score
+        ------------------------------ */
+        
+        // Score has successfully saved
+        function scoresSaved() {
+            console.log('Successfully saved a score!');
+            
+            console.log('Latest Scores:');
+	        console.log(latestScores);
+        }
+        
+        // Write the score to disk
+        function saveScores() {
+        	// Convert latestScores to string
+            var data = JSON.stringify(latestScores);
+            
+            // Make sure the cursor is back at the beginning of the file
+            scoreWriter.seek(0);
+            
+            // Finally, write the score
+            scoreWriter.write(data);
+            
+            // Success?
+            scoreWriter.onwrite = scoresSaved;
+        }
+        
+        // Call this to set your score
+        function setScore(quiz_name, score) {
+        	// Add new score to the latestScores object
+            latestScores[quiz_name] = score;
+            
+            // Save the score to disk
+            saveScores();
+        }
+        
+        /* Load the scores
+        ------------------------------ */
+        
+        // Load scores from file
+        function loadScores() {        	
+        	// Set up a new FileReader
+            var reader = new FileReader();
+            
+            // Success?
+            reader.onloadend = function(evt) {            	
+            	console.log('Successfully loaded a score!');
+            	console.log(evt.target.result.length);
+            	console.log(evt.target.result);
+        	
+        		// Save the result as the new latestScores
+        		// if there's content in the file
+        		if (evt.target.result.length > 0) {
+	        		latestScores = JSON.parse(evt.target.result);
+	        		
+	        		console.log('Loaded Scores:');
+			        console.log(latestScores);
+	        	}
+            };
+            
+            // Read the file as text
+            reader.readAsText(scoreFile);
+        }
+        
+        // Call this to load a score
+        function getScore(quiz_name) {
+        	// Load the scores
+	        loadScores();
+	        
+	        // Return the score	        
+	        return latestScores[quiz_name];
+	        
+	        console.log('Returning Score:');
+	        console.log(latestScores[quiz_name]);
+        }
+        
+        /* File System Score Handling
+        ------------------------------------------------------------ */
+        
+        function fail(evt) {
+        	console.log('Error:');
+        	console.log(error.code);
+        }
+        
+        // Get the filesystem
+        function gotFS(fileSystem) {
+        	fileSystem.root.getFile('scores.txt', { create: true, exclusive: false }, gotFileEntry, fail);
+        }
+        
+        // Set a writer and file
+        function gotFileEntry(fileEntry) {
+            fileEntry.createWriter(gotFileWriter, fail);
+            fileEntry.file(gotFile, fail);
+        }
+        
+        // writer is now scoreWriter
+        function gotFileWriter(writer) {
+            scoreWriter = writer;
+        }
+        
+        // file is now scoreFile
+        function gotFile(file) {        	
+            scoreFile = file;
+            
+            // Load the initial set of scores
+    		loadScores();
+        }
+		
+		/* Summary Page
+		------------------------------------------------------------ */
+		
+		function showSummary() {
+			// Grab the current quiz's ID
+			var quizId = $('#cards').attr('title');
+			
+		    // Show the summary page
+		    $summary.show();
+		    
+		    // When the transition ends, add the medal shine
+		    $summary.bind('webkitTransitionEnd', function() {
+			    $('img.medal-shine').addClass('animate');
+		    });
+		    
+		    // Calculate the percentage
+		    quizPercentage = Math.round((answersRight / currentQuizQuestions.length) * 100);
+		    
+		    // Show the percentage
+		    $('#quiz-percentage').text('You got ' + quizPercentage + '%');
+		    
+		    // Show medals
+		    if (quizPercentage === 100) {
+		    	// Summary screen medal
+		        $quizMedal.attr('src', 'static/images/medal_gold.png');
+		        
+		        // Homescreen medal
+		        $('#' + currentQuizShortName + '-medal').attr('src', 'static/images/medal_gold_small.png').show();
+		        
+		        // Update the homepage quiz card medal
+		        slides[quizId] = slides[quizId].replace(imgSrcReplace, '$1"static/images/medal_gold_small.png"');
+		        slides[quizId] = slides[quizId].replace(imgStyleReplace, '$1"display: block;"');
+		    }
+		    else if (quizPercentage < 100 && quizPercentage >= 70) {
+		    	// Summary screen medal
+		        $quizMedal.attr('src', 'static/images/medal_silver.png');
+		        
+		        // Homescreen medal
+		        $('#' + currentQuizShortName + '-medal').attr('src', 'static/images/medal_silver_small.png').show();
+		        
+		        // Update the homepage quiz card medal
+		        slides[quizId] = slides[quizId].replace(imgSrcReplace, '$1"static/images/medal_silver_small.png"');
+		        slides[quizId] = slides[quizId].replace(imgStyleReplace, '$1"display: block;"');
+		    }
+		    else {
+		    	// Summary screen medal
+		        $quizMedal.attr('src', 'static/images/medal_bronze.png');
+		        
+		        // Homescreen medal
+		        $('#' + currentQuizShortName + '-medal').attr('src', 'static/images/medal_bronze_small.png').show();
+		        
+		        // Update the homepage quiz card medal
+		        slides[quizId] = slides[quizId].replace(imgSrcReplace, '$1"static/images/medal_bronze_small.png"');
+		        slides[quizId] = slides[quizId].replace(imgStyleReplace, '$1"display: block;"');
+		    }
+		    
+		    // Save this score
+		    setScore(currentQuizShortName, answersRight);
+		    
+		    // MIXPANEL
+		    mixpanel.track('Completed Quiz', {
+		    	'Quiz Name': currentQuizName,
+		    	'Final Percentage': quizPercentage
+		    });
+		}
+		
+		/* Correct Answer Notification
+        ------------------------------------------------------------ */
+		
+		function answerCorrect() {
+			// Show the success notification
+			$successMessage.addClass('fade-in');
+
+			// Spin the sunburst
+			$successSunburst.addClass('spin');
+			
+			// Play success audio
+            sound_success();
+            
+            // Hide after 3 seconds (same delay when showing new question)
+            setTimeout(function() {
+            	// Hide the success notification
+				$successMessage.removeClass('fade-in');
+				
+				setTimeout(function() {				    
+				    // Stop spinning the sunburst
+				    $successSunburst.removeClass('spin');
+				}, 200);
+            }, 1600);
+		}
+		
+		/* Wrong Answer Notification
+        ------------------------------------------------------------ */
+        
+        function answerWrong(buttonClicked) {
+        	// Grab the clicked button
+        	var buttonClicked = buttonClicked;
+			
+			// Play fail audio
+			sound_fail();
+			
+			// Mark button wrong
+			buttonClicked.addClass('shake').text('Sorry, that\'s wrong.');
+			
+			// Fade out other buttons
+			buttonClicked.siblings('button').css('opacity', '0.5');
+        }
+		
+		/* Answer the questions...
+        ------------------------------------------------------------ */
+        
+        function reInit() {
+            $('#quiz-buttons button').tappable({            	
+                callback: function() {
+                	// Check to see if it's disabled
+                	if ($(this).is('[disabled]')) {
+                		// Don't proceed
+                		return;
+                	}
+                
+                	// Make all the buttons disabled
+                    $('#quiz-buttons button').attr('disabled', 'disabled');
+                    
+                    // Get the clicked button
+                    var buttonClicked = $(this);
+                    
+                    if (buttonClicked.hasClass('correct-answer')) {
+                        // Add right answer
+                        answersRight++;
+                        
+                        // MIXPANEL
+                        mixpanel.track('Answer Correct', {
+                        	'Quiz Name': currentQuizName,
+                        	'Question ID': currentQuestion,
+                        	'Choice Picked': buttonClicked.text()
+                        });
+                        
+                        // Correct answer stuff
+                        answerCorrect();
+                    }
+                    else {
+                    	// Add wrong answer
+                        answersWrong++;
+                        
+                        // MIXPANEL
+                        mixpanel.track('Answer Wrong', {
+                        	'Quiz Name': currentQuizName,
+                        	'Question ID': currentQuestion,
+                        	'Choice Picked': buttonClicked.text()
+                        });
+                        
+                        // Wrong answer stuff
+                        answerWrong(buttonClicked);
+                    }
+                    
+                    // Set the next question
+                    currentQuestion++;
+                    
+                    // Check if it's the last question
+                    if (currentQuestion === currentQuizQuestions.length) {
+                        // Show summary
+                        showSummary();
+                    }
+                    else {
+                        // Add next question
+                        addQuestion();
+                    }
+                    
+                    setTimeout(function() {
+                        // If this is the last question...
+                        if (currentQuestion === currentQuizQuestions.length) {
+                            // Hide this question
+                            buttonClicked.closest('.question').css('-webkit-transform', 'translateX(-480px)');
+                            
+                            // Slide in the summary screen
+                            $summary.css('-webkit-transform', 'translateY(0)');
+                            
+                            // Fade out the back arrow
+                            $('#back-arrow').addClass('fade-out');
+                            
+                            // Fade out the question count
+                            $('#question-count').addClass('fade-out');
+                            
+                            // Animate the challenge button
+                            $('#button-challenge').removeClass('animate-jump').addClass('animate-jump');
+                            
+                            // Set up the home button
+                            $('#button-home').tappable(function() {
+                                // Hide this quiz
+                                hide_quiz();
+                                
+                                // Show the homepage
+                                show_homepage();
+                            });
+                        }
+                        else {                        
+                            // Hide this question and show the next one
+                            buttonClicked.closest('.question').css('-webkit-transform', 'translateX(-480px)').next().css('-webkit-transform', 'translateX(0)');
+                            
+                            // Update the question counter in the toolbar
+                            $currentQuestion.text(currentQuestion + 1);
+                            $currentQuestion.addClass('animate-pop');
+                        }
+                        
+                        // Remove the previous question from the DOM
+                        setTimeout(function() {
+                            buttonClicked.closest('.question').remove();
+                        }, 500);
+                    }, 1500);
+                }
+            });
+            
+            // After the new question number is done animating,
+            // remove its class to prepare for the next time.
+            $currentQuestion.bind('webkitAnimationEnd', function() {
+	            $(this).removeClass('animate-pop');
+            });
+        }
+        
+        /* Add a quiz question
+        ------------------------------------------------------------ */
+        
+        function addQuestion() {
+        	// If there are no wrong questions...
+    		questionNumber = currentQuestion;
+        	
+            // Clone the question template, change its ID, and show it
+            var $newQuestion = $('#question-template').clone().attr('id', 'question' + questionNumber).show();
+            
+            // If it's the first question, don't start it off screen
+            if (currentQuestion === 0) {
+                $newQuestion.css('-webkit-transform', 'translateX(0)');
+            }
+            
+            // Insert the image
+            $('.polaroid', $newQuestion).attr('style', 'background-image: url("' + currentQuizQuestions[questionNumber].photoUrl + '");');
+            
+            // Insert the question text
+            $('h1', $newQuestion).text(currentQuizQuestions[questionNumber].questionText);
+            
+            // Insert the buttons
+            var $newQuestionButtons = $('#quiz-buttons', $newQuestion);
+            
+            for (i = 0; i < currentQuizQuestions[questionNumber].choices.length; i++) {
+                if (currentQuizQuestions[questionNumber].choices[i] === currentQuizQuestions[questionNumber].correctAnswer) {
+                    $newQuestionButtons.append('<button class="button red correct-answer">' + currentQuizQuestions[questionNumber].choices[i] + '</button>');
+                }
+                else {
+                    $newQuestionButtons.append('<button class="button red">' + currentQuizQuestions[questionNumber].choices[i] + '</button>');
+                }
+            }
+            
+            // Finally, append it to the DOM
+            $quizQuestions.append($newQuestion);
+            
+            // Re-initialize button listeners
+            reInit();
+        }
+        
+        /* Email results to a friend
+        ------------------------------------------------------------ */
+        
+        $('#button-challenge').tappable({
+            callback: function() {
+            	// Bring up a SMS sheet
+            	window.plugins.smsComposer.showSMSComposerWithCB(function(result) {
+            		if (result == 0) {
+            			// MIXPANEL
+		            	mixpanel.track('Sending SMS Cancelled');
+            		}
+			        else if (result == 1) {
+				        // MIXPANEL
+		            	mixpanel.track('SMS Sent');
+			        }
+			        else if (result == 2) {
+				        // MIXPANEL
+		            	mixpanel.track('Sending SMS Failed');
+		            }
+			        else if (result == 3) {
+				        // MIXPANEL
+		            	mixpanel.track('SMS Not Sent');
+		            }
+            	}, null, 'I just got ' + quizPercentage + '% on the ' + currentQuizName + ' quiz! Download Image IQ and try to beat my high score: http://bit.ly/getImageIQ');
+        	}
+        });
+        
+        /* Go back to the homescreen
+        ------------------------------------------------------------ */
+        
+        function backOnConfirm(buttonIndex) {
+            if (buttonIndex === 1) {
+            	// MIXPANEL
+            	mixpanel.track('Left Quiz Early');
+            	
+            	// We don't want the homescreen to slide to the next quiz card
+            	var dontProceed = true;
+            	
+                // Hide the quiz
+                hide_quiz();
+                
+                // Show the homepage
+                show_homepage(true);
+            }
+            else {
+            	// MIXPANEL
+            	mixpanel.track('Stayed in Quiz');
+            	
+                // Dismiss the dialog
+                return false;
+            }
+        }
+        
+        $('#back-arrow').tappable(function() {
+        	// MIXPANEL
+        	mixpanel.track('Hit the Home Button');
+        	
+            // Confirm before you go back
+            navigator.notification.confirm(
+                'If you go home, your quiz progress will not be saved.', // Message
+                backOnConfirm, // Callback to invoke with index of button pressed
+                'Go home?', // Title
+                'Go Home, Stay Here' // buttonLabels
+            );
+        });
+        
+        /* Go back to the homescreen
+        ------------------------------------------------------------ */
+        
+        function rateAppConfirm(buttonIndex) {
+            if (buttonIndex === 2) {
+            	// MIXPANEL
+            	mixpanel.track('Chose to Rate App');
+            	
+            	// Send user to App Store review page
+	            window.open('itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=561835394&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software');
+            }
+            else {
+            	// MIXPANEL
+            	mixpanel.track('Did not choose to Rate App');
+            	
+            	// Remember they were asked
+            	askedToRateApp = true;
+            	
+                // Dismiss the dialog
+                return false;
+            }
+        }
+        
+        function rateApp() {
+        	// MIXPANEL
+        	mixpanel.track('Prompted to Rate App');
+        	
+            // Confirm before you go back
+            navigator.notification.confirm(
+                'Having fun? Please take a second and rate us in the App Store.', // Message
+                rateAppConfirm, // Callback to invoke with index of button pressed
+                'Please Rate Image IQ', // Title
+                'No Thanks, Rate App' // buttonLabels
+            );
+        }
+        
+        /* Page Handling
+        ------------------------------------------------------------ */
+        
+        /* Homepage
+        ------------------------------ */
+        
+        function show_homepage(dontProceed) {        	
+        	// Make the cards clickable
+        	$($pageHome).removeClass('click-through');
+        	
+	        // Fade out the toolbar
+            $('.toolbar', $pageHome).removeClass('fade-out');
+            
+            // Slide up the background image
+            $('img.wallpaper', $pageHome).removeClass('slide-up');
+            
+            // Slide up the cards
+            $('#cards', $pageHome).removeClass('slide-up');
+            
+            // Prompt user to rate the app
+            if (Object.keys(latestScores).length === 3 && askedToRateApp == false) {
+            	rateApp();
+            }
+            
+            // Progress to the next quiz
+            if (dontProceed != true ) {
+            	setTimeout(function() {
+	        		carousel.next();
+            	}, 1100);
+            }
+        }
+        
+        function hide_homepage() {
+        	// Make the cards un-clickable
+        	$($pageHome).addClass('click-through');
+        	        	
+            // Fade out the toolbar
+            $('.toolbar', $pageHome).addClass('fade-out');
+            
+            // Slide up the background image
+            $('img.wallpaper', $pageHome).addClass('slide-up');
+            
+            // Slide up the cards
+            $('#cards', $pageHome).addClass('slide-up');
+        }
+        
+        /* Quiz Page
+        ------------------------------ */
+        
+        function show_quiz() {
+        	// Get the quiz's ID from the title attribute
+            var quizId = $('#cards').attr('title');
+            
+            // Get the quiz questions
+    	    $.getJSON('quizzes/quizzes.json', function(data) {
+	    	    currentQuizQuestions = data.quizzes[quizId].questions;
+	    	    currentQuizName = data.quizzes[quizId].quizFullName;
+	    	    currentQuizShortName = data.quizzes[quizId].quizName;
+	    	    
+	    	    // Randomize the quiz questions and choices
+	    	    fisherYatesShuffle(currentQuizQuestions);
+	    	    for (i = 0; i < currentQuizQuestions.length; i++) {
+    	    	    fisherYatesShuffle(currentQuizQuestions[i].choices);
+	    	    }
+            })
+            // When it's done, show the quiz questions to the user
+            .complete(function() {            	
+            	// Clear out the quiz values
+            	currentQuestion = 0;
+            	answersRight = 0;
+            	answersWrong = 0;
+            	questionNumber = 0;
+            	quizPercentage = 0;
+            	
+            	// Show content
+                $pageExtra.show();
+                
+                // After 100ms...
+	            setTimeout(function() {
+	            	// Fade in the content
+	            	$pageExtra.removeClass('fade-out');
+	            }, 100);
+                
+                // Fade in the back arrow
+	            $('#back-arrow').removeClass('fade-out');
+	            
+	            $('#question-count').removeClass('fade-out');
+            	
+            	// Add a question
+            	addQuestion();
+            	
+            	// Update the question counter in the toolbar
+            	$currentQuestion.text(currentQuestion + 1);
+            	$totalQuestions.text(currentQuizQuestions.length);
+            	
+            	// MIXPANEL
+            	mixpanel.track('Loaded a Quiz', {
+            	    'Quiz Name': currentQuizName
+            	});
+            });
+        }
+        
+        function hide_quiz() {
+        	// Fade out the quiz
+        	$pageExtra.addClass('fade-out');
+        	
+        	// After 1 second...
+            setTimeout(function() {
+            	// Clear out the quiz questions
+	            $quizQuestions.empty();
+	            
+	            // Hide the summary
+	            $summary.hide().css('-webkit-transform', 'translateY(-480px)');
+	            
+	            // Hide that page
+	            $pageExtra.hide();
+            }, 1000);
+        }
+        
+        /* AJAX Request for building the quiz card carousel
+        ------------------------------------------------------------ */
+        
+        function build_carousel() {
+	        // Grab the list of quizzes
+    	    $.getJSON('quizzes/quizzes.json', function(data) {    	    
+                var quizName = '';
+                var quizScorePercentage;
+                
+                for (i = 0; i < data.quizzes.length; i++) {
+                    // Save the quiz name
+                    quizName = data.quizzes[i].quizName;
+                    
+                    // Check if quiz has questions (for coming soon card)
+                    if (data.quizzes[i].questions) {                    
+                    	// Calculate quiz percentage
+	                    quizScorePercentage = Math.round((latestScores[quizName] / data.quizzes[i].questions.length) * 100);
+	                    
+	                    // Set the slide images
+                        if (quizScorePercentage === 100) {
+	                        slides[i] = '<img src="static/images/medal_gold_small.png" id="' + quizName + '-medal" class="small-medal" width="47" height="50" style="" /><a id="quiz' + i + '" title="' + i + '" style="background-image: url(\'quizzes/' + quizName + '/poster.jpg\');"></a>';
+                        }
+                        else if (quizScorePercentage < 100 && quizScorePercentage >= 70) {
+	                        slides[i] = '<img src="static/images/medal_silver_small.png" id="' + quizName + '-medal" class="small-medal" width="47" height="50" style="" /><a id="quiz' + i + '" title="' + i + '" style="background-image: url(\'quizzes/' + quizName + '/poster.jpg\');"></a>';
+                        }
+                        else if (quizScorePercentage < 70 && quizScorePercentage >= 0) {
+	                        slides[i] = '<img src="static/images/medal_bronze_small.png" id="' + quizName + '-medal" class="small-medal" width="47" height="50" style="" /><a id="quiz' + i + '" title="' + i + '" style="background-image: url(\'quizzes/' + quizName + '/poster.jpg\');"></a>';
+                        }
+                        else {
+                        	slides[i] = '<img src="" id="' + quizName + '-medal" style="display: none;" class="small-medal" width="47" height="50" style="" /><a id="quiz' + i + '" title="' + i + '" style="background-image: url(\'quizzes/' + quizName + '/poster.jpg\');"></a>';
+                        }
+                    }
+                    else {
+                    	// Coming soon card...
+                    	slides[i] = '<a id="quiz' + i + '" title="' + i + '" style="background-image: url(\'quizzes/' + quizName + '/poster.jpg\');"></a>';
+                    }
+                }
+            })
+    	    // Set up the card carousel
+    	    .complete(function() {
+	    	    carousel = new SwipeView('#cards', {
+			        numberOfPages: slides.length,
+			        hastyPageFlip: true
+			    });
+			     
+			    // Load initial data
+			    for (i = 0; i < 3; i++) {
+			        page = i == 0 ? slides.length - 1 : i - 1;
+			     
+			        el = document.createElement('span');
+			        el.innerHTML = slides[page];
+			        carousel.masterPages[i].appendChild(el);
+			    }
+			    
+			    // When you flip the carousel...
+			    carousel.onFlip(function() {
+			        var el, upcoming, i;
+			     
+			        for (i = 0; i < 3; i++) {
+			            upcoming = carousel.masterPages[i].dataset.upcomingPageIndex;
+			     
+			            if (upcoming != carousel.masterPages[i].dataset.pageIndex) {
+			                el = carousel.masterPages[i].querySelector('span');
+			                el.innerHTML = slides[upcoming];
+			            }
+			        }
+			        
+			        // If this is the coming soon card...
+			        if (parseInt($('.swipeview-active').find('a').attr('title')) === (slides.length - 1)) {
+			        	// Hide the button
+			        	$takeQuizButton.addClass('fade-out-half');
+			        }
+			        else {
+			        	// Show the button
+			        	$takeQuizButton.removeClass('fade-out-half');
+			        }
+			    });
+	        });
+        }
+        
+        /* Carousel Controls
+        ------------------------------------------------------------ */
+        
+        $('.slider-control.left').tappable({
+            callback: function() {
+            	// Show previous item in carousel
+	            carousel.prev();
+            }
+        });
+        
+        $('.slider-control.right').tappable({
+            callback: function() {
+            	// Show next item in carousel
+	            carousel.next();
+            }
+        });
+        
+        /* Listener for quiz call to action
+        ------------------------------------------------------------ */
+        
+        $('#button-take-quiz, #cards').tappable(function() {
+        	// Get the link URL of the active card
+        	var activeCardUrl = $('.swipeview-active').find('a').attr('title');
+        	
+        	// If this isn't the Coming Soon card...
+        	if (activeCardUrl != (slides.length - 1)) {
+        		// Give the clicked button the same href
+        		$('#button-take-quiz, #cards').attr('title', activeCardUrl);
+        		
+        		// Hide the homepage
+        		hide_homepage();
+        		        
+        		// Show the quiz
+        		show_quiz();
+        	}
+        });
+        
+        /* Document is ready
+        ------------------------------------------------------------ */
+        
+    	$(document).ready(function() {	    	
+	    	// Preload images
+	    	preload([
+	    		'static/images/background_wood.png',
+	    		'static/images/background_question.png',
+	    		'static/images/swipe_left_alt.png',
+	    		'static/images/swipe_right_alt.png',
+	    		'static/images/star.png',
+	    		'static/images/sunburst.png'
+    		]);
+    		
+    		// TO VIEW CAROUSEL IN BROWSER, UNCOMMENT THIS LINE
+    		// COMMENT build_carousel() IN onDeviceReady()
+    		// build_carousel();
+		});
+		
+		/* Device is ready
+    	------------------------------------------------------------ */
+    	
+    	function onBodyLoad() {
+    		document.addEventListener('deviceready', onDeviceReady, false);
+    	}
+    	
+    	function onDeviceReady() {
+    		// Initialize the File System
+	    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+	    	
+	    	// Retrieve the quizzes and build the carousel
+    		build_carousel();
+		}
+    </script>
+</body>
+</html>

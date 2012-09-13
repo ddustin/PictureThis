@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'PictureThis' target in the 'PictureThis' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif

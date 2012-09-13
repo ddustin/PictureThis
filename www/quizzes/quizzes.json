@@ -1,0 +1,463 @@
+{
+	"quizzes": [
+	    {
+			"quizName": "presidents",
+			"quizFullName": "What the Pres",
+			"questions": [
+	    		{
+	    		    "photoUrl": "quizzes/presidents/jefferson.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["John Adams", "Calvin Coolidge", "Thomas Jefferson"],
+	    		    "correctAnswer": "Thomas Jefferson"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/truman.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["Dwight D. Eisenhower", "Harry S. Truman", "James Madison"],
+	    		    "correctAnswer": "Harry S. Truman"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/carter.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["Jimmy Carter", "Andrew Jackson", "Herbert Hoover"],
+	    		    "correctAnswer": "Jimmy Carter"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/grant.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["Andrew Johnson", "Bill Clinton", "Ulysses Grant"],
+	    		    "correctAnswer": "Ulysses Grant"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/washington.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["James Monroe", "George Washington", "Grover Cleveland"],
+	    		    "correctAnswer": "George Washington"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/gw_bush.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["Warren Harding", "Benjamin Harrison", "George W. Bush"],
+	    		    "correctAnswer": "George W. Bush"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/taft.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["William Taft", "Theodore Roosevelt", "Lyndon Johnson"],
+	    		    "correctAnswer": "William Taft"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/reagan.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["Richard Nixon", "Zachary Taylor", "Ronald Reagan"],
+	    		    "correctAnswer": "Ronald Reagan"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/roosevelt.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["John Quincy Adams", "Bill Clinton", "Franklin D. Roosevelt"],
+	    		    "correctAnswer": "Franklin D. Roosevelt"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/presidents/garfield.jpg",
+	    		    "questionText": "What president?",
+	    		    "choices": ["James Garfield", "James Buchanan", "Martin Van Buren"],
+	    		    "correctAnswer": "James Garfield"
+	    		}
+	    	]
+	    },
+	    {
+			"quizName": "landmarks",
+			"quizFullName": "What the City",
+			"questions": [
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/eiffel_tower.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Berlin", "Paris", "Madrid"],
+	    		    "correctAnswer": "Paris"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/london_clock_tower.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Stockholm", "Rome", "London"],
+	    		    "correctAnswer": "London"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/empire_state_building.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["New York City", "Chicago", "Boston"],
+	    		    "correctAnswer": "New York City"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/taihe_palace.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Tokyo", "Beijing", "Taipan"],
+	    		    "correctAnswer": "Beijing"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/sydney_opera_house.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Venice", "Sydney", "Manila"],
+	    		    "correctAnswer": "Sydney"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/golden_gate.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["San Diego", "Los Angeles", "San Francisco"],
+	    		    "correctAnswer": "San Francisco"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/mayan_ruin.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Chichen Itza", "Machu Picchu", "Otavalo"],
+	    		    "correctAnswer": "Chichen Itza"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/jerusalem_temple_mount.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Florence", "Jerusalem", "Buenos Aires"],
+	    		    "correctAnswer": "Jerusalem"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/kremlin_domes.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Budapest", "Dubrovnik", "Moscow"],
+	    		    "correctAnswer": "Moscow"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/landmarks/taj_majal.jpg",
+	    		    "questionText": "What city is this in?",
+	    		    "choices": ["Agra", "Bangalore", "Mumbai"],
+	    		    "correctAnswer": "Agra"
+	    		}
+	    	]
+	    },
+	    {
+	    	"quizName": "logos",
+			"quizFullName": "What the Logo?",
+			"questions": [
+				{
+	    		    "photoUrl": "quizzes/logos/adidas.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Adidas", "New Balance", "Saucony"],
+	    		    "correctAnswer": "Adidas"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/starbucks.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Willy Wonka", "Evian", "Starbucks"],
+	    		    "correctAnswer": "Starbucks"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/kfc.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Burger King", "Bojangles", "KFC"],
+	    		    "correctAnswer": "KFC"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/reebok.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Asics", "Reebok", "Hanes"],
+	    		    "correctAnswer": "Reebok"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/sheraton.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Hilton", "Sheraton", "Marriott"],
+	    		    "correctAnswer": "Sheraton"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/atari.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Sega", "Atari", "Activision"],
+	    		    "correctAnswer": "Atari"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/mcdonalds.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["McDonald's", "Taco Bell", "Wendy's"],
+	    		    "correctAnswer": "McDonald's"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/motorola.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Motorola", "Verizon", "Samsung"],
+	    		    "correctAnswer": "Motorola"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/pepsi.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Sunkist", "Gatorade", "Pepsi"],
+	    		    "correctAnswer": "Pepsi"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/logos/generalelectric.png",
+	    		    "questionText": "What logo?",
+	    		    "choices": ["Mitsubishi", "Caterpillar", "General Electric"],
+	    		    "correctAnswer": "General Electric"
+	    		}
+			]
+	    },
+	    {
+			"quizName": "states",
+			"quizFullName": "What the State?",
+			"questions": [
+	    		{
+	    		    "photoUrl": "quizzes/states/california.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["New York", "California", "Washington"],
+	    		    "correctAnswer": "California"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/minnesota.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Minnesota", "Wisconsin", "Virginia"],
+	    		    "correctAnswer": "Minnesota"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/tennessee.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Tennessee", "North Carolina", "Nevada"],
+	    		    "correctAnswer": "Tennessee"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/arizona.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Colorado", "Arizona", "Louisiana"],
+	    		    "correctAnswer": "Arizona"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/wisconsin.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Michigan", "Florida", "Wisconsin"],
+	    		    "correctAnswer": "Wisconsin"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/oregon.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Montana", "Oregon", "Vermont"],
+	    		    "correctAnswer": "Oregon"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/missouri.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Kansas", "South Carolina", "Missouri"],
+	    		    "correctAnswer": "Missouri"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/maine.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Alabama", "Ohio", "Maine"],
+	    		    "correctAnswer": "Maine"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/utah.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Utah", "Oregon", "South Carolina"],
+	    		    "correctAnswer": "Utah"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/states/newmexico.png",
+	    		    "questionText": "What state is this?",
+	    		    "choices": ["Texas", "Montana", "New Mexico"],
+	    		    "correctAnswer": "New Mexico"
+	    		}
+	    	]
+	    },
+	    {
+	    	"quizName": "youngcelebrities",
+			"quizFullName": "Celebrities When They Were Young",
+			"questions": [
+				{
+	    		    "photoUrl": "quizzes/youngcelebrities/aniston.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Sharon Stone", "Jennifer Aniston", "Celine Dion"],
+	    		    "correctAnswer": "Jennifer Aniston"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/hawn.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Goldie Hawn", "Kate Hudson", "Madonna"],
+	    		    "correctAnswer": "Goldie Hawn"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/monroe.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Lily Cole", "Marilyn Monroe", "Alicia Silverstone"],
+	    		    "correctAnswer": "Marilyn Monroe"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/cole.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Lady Gaga", "Alicia Silverstone", "Lily Cole"],
+	    		    "correctAnswer": "Lily Cole"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/gaga.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Lady Gaga", "Marilyn Monroe", "Olivia Wilde"],
+	    		    "correctAnswer": "Lady Gaga"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/shields.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Reese Witherspoon", "Daryl Hannah", "Brooke Shields"],
+	    		    "correctAnswer": "Brooke Shields"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/madonna.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Madonna", "Heather Locklear", "Miley Cyrus"],
+	    		    "correctAnswer": "Madonna"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/cruise.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Tom Cruise", "Brad Pitt", "Burt Reynolds"],
+	    		    "correctAnswer": "Tom Cruise"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/murphy.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Dave Chapelle", "Chris Rock", "Eddie Murphy"],
+	    		    "correctAnswer": "Eddie Murphy"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/youngcelebrities/cyrus.jpg",
+	    		    "questionText": "What celeb is this?",
+	    		    "choices": ["Lily Cole", "Kate Hudson", "Miley Cyrus"],
+	    		    "correctAnswer": "Miley Cyrus"
+	    		}
+	    	]
+	    },
+	    {
+			"quizName": "europe",
+			"quizFullName": "What the Country?",
+			"questions": [
+	    		{
+	    		    "photoUrl": "quizzes/europe/italy.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Sweden", "England", "Italy"],
+	    		    "correctAnswer": "Italy"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/germany.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Spain", "Germany", "Ukraine"],
+	    		    "correctAnswer": "Germany"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/iceland.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Iceland", "Slovakia", "Denmark"],
+	    		    "correctAnswer": "Iceland"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/france.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Norway", "France", "Spain"],
+	    		    "correctAnswer": "France"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/uk.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Ireland", "Serbia", "United Kingdom"],
+	    		    "correctAnswer": "United Kingdom"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/portugal.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Switzerland", "Portugal", "Malta"],
+	    		    "correctAnswer": "Portugal"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/poland.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Latvia", "Poland", "Czech Republic"],
+	    		    "correctAnswer": "Poland"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/turkey.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Turkey", "Estonia", "Greece"],
+	    		    "correctAnswer": "Turkey"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/luxembourg.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["Lithuania", "Hungary", "Luxembourg"],
+	    		    "correctAnswer": "Luxembourg"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/europe/croatia.jpg",
+	    		    "questionText": "What country is this?",
+	    		    "choices": ["San Marino", "Poland", "Croatia"],
+	    		    "correctAnswer": "Croatia"
+	    		}
+	    	]
+	    },
+	    {
+	    	"quizName": "americancities",
+			"quizFullName": "American Cities",
+			"questions": [
+				{
+	    		    "photoUrl": "quizzes/americancities/seattle.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Washington, DC", "Little Rock, AR", "Seattle, WA"],
+	    		    "correctAnswer": "Seattle, WA"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/lasvegas.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Hot Springs, AR", "Las Vegas, NE", "Shreveport, LA"],
+	    		    "correctAnswer": "Las Vegas, NE"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/philadelphia.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Washington, DC", "Boston, MA", "Philadelphia, PA"],
+	    		    "correctAnswer": "Philadelphia, PA"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/stlouis.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Atlanta, GA", "St. Louis, MO", "Chicago, IL"],
+	    		    "correctAnswer": "St. Louis, MO"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/laketahoe.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Lake Texoma, TX", "Lake Tahoe, NE", "Salt Lake City, UT"],
+	    		    "correctAnswer": "Lake Tahoe, NE"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/chicago.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Chicago, IL", "New York, NY", "Dallas, TX"],
+	    		    "correctAnswer": "Chicago, IL"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/capecod.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Virginia Beach, VA", "Providence, RI", "Cape Cod, MA"],
+	    		    "correctAnswer": "Cape Cod, MA"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/sanantonio.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["San Antonio, TX", "Fort Lauderdale, FL", "New Orleans, LA"],
+	    		    "correctAnswer": "San Antonio, TX"
+	    		},
+	    		{
+	    		    "photoUrl": "quizzes/americancities/hotsprings.jpg",
+	    		    "questionText": "What city is this?",
+	    		    "choices": ["Colorado Springs, CO", "Saratoga Springs, NY", "Hot Springs, AR"],
+	    		    "correctAnswer": "Hot Springs, AR"
+	    		}
+	    	]
+	    },
+	    {
+			"quizName": "comingsoon"
+		}
+    ]
+}
